@@ -1,0 +1,39 @@
+name: brew audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "Casks/**"
+      - "Formula/**"
+      - ".github/workflows/audit.yml"
+  pull_request:
+    paths:
+      - "Casks/**"
+      - "Formula/**"
+      - ".github/workflows/audit.yml"
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: macos-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout tap
+        uses: actions/checkout@v4
+        with:
+          path: tap
+
+      - name: Set up tap as a Homebrew tap
+        run: |
+          set -euo pipefail
+          mkdir -p "$(brew --repository)/Library/Taps/staixbwlb"
+          ln -sf "$GITHUB_WORKSPACE/tap" "$(brew --repository)/Library/Taps/staixbwlb/homebrew-cask"
+          brew tap-info staixbwlb/cask
+
+      - name: Audit cask
+        run: brew audit --cask --strict --online staixbwlb/cask/anchor
+
+      - name: Audit formula
+        run: brew audit --formula --strict --online staixbwlb/cask/anchor-cli
