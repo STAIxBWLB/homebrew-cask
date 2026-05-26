@@ -1,9 +1,9 @@
 cask "anchor" do
   arch arm: "aarch64", intel: "x64"
 
-  version "0.2.16"
-  sha256 arm: "2c009427fc91e9a94e6f47abb505d6ee05fd781808af0ae5c6a68ac936309210",
-         intel: "c35c0adce9df11f86d9a4d9010013c6bc6257afb056510aa0fe1910d56143a70"
+  version "0.2.17"
+  sha256 arm: "7df8f26a09b6597bc210f94b33a1310e8182674be9f0ca40bffb9dc0f8e14de0",
+         intel: "9ec360482125c317440c7b002295de41288a3c95ee6d2c81ae805a30db170505"
 
   url "https://github.com/STAIxBWLB/anchor/releases/download/v#{version}/Anchor_#{version}_darwin_#{arch}_dmg.dmg",
       verified: "github.com/STAIxBWLB/anchor/"
