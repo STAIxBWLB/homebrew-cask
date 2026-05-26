@@ -7,8 +7,8 @@ Homebrew tap for [Anchor](https://github.com/STAIxBWLB/anchor) — a local-first
 ```sh
 brew tap staixbwlb/cask
 
-brew install --cask anchor       # desktop app → /Applications/Anchor.app
-brew install anchor-cli          # CLI → /opt/homebrew/bin/anchor (or /usr/local/bin on Intel)
+brew install --cask anchor-workspace # desktop app → /Applications/Anchor.app
+brew install anchor-cli              # CLI → /opt/homebrew/bin/anchor (or /usr/local/bin on Intel)
 ```
 
 Supports both Apple Silicon (`aarch64`) and Intel (`x86_64`) Macs.
@@ -17,7 +17,7 @@ Supports both Apple Silicon (`aarch64`) and Intel (`x86_64`) Macs.
 
 ```sh
 brew update
-brew upgrade --cask anchor
+brew upgrade --cask anchor-workspace
 brew upgrade anchor-cli
 ```
 
