@@ -5,8 +5,7 @@ cask "anchor-workspace" do
   sha256 arm: "7df8f26a09b6597bc210f94b33a1310e8182674be9f0ca40bffb9dc0f8e14de0",
          intel: "9ec360482125c317440c7b002295de41288a3c95ee6d2c81ae805a30db170505"
 
-  url "https://github.com/STAIxBWLB/anchor/releases/download/v#{version}/Anchor_#{version}_darwin_#{arch}_dmg.dmg",
-      verified: "github.com/STAIxBWLB/anchor/"
+  url "https://github.com/STAIxBWLB/anchor/releases/download/v#{version}/Anchor_#{version}_darwin_#{arch}_dmg.dmg"
   name "Anchor"
   desc "Local-first AI workspace desktop app"
   homepage "https://github.com/STAIxBWLB/anchor"
