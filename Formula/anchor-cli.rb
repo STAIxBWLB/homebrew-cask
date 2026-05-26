@@ -1,16 +1,16 @@
 class AnchorCli < Formula
   desc "Command-line interface for Anchor Workspace"
   homepage "https://github.com/STAIxBWLB/anchor"
-  version "0.2.15"
+  version "0.2.16"
   license :cannot_represent
 
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/STAIxBWLB/anchor/releases/download/v#{version}/anchor-cli_#{version}_darwin_aarch64.tar.gz"
-      sha256 "0361528b60c0a8c06fb813de8c88699b6ef4ca8220ca8b2c0470fe7d1b4cecf7"
+      sha256 "80c9ab8c5aae9ad2ee92cffe03b16332c708873800d0f0c434d41bf7834dc2d0"
     else
       url "https://github.com/STAIxBWLB/anchor/releases/download/v#{version}/anchor-cli_#{version}_darwin_x86_64.tar.gz"
-      sha256 "c8b07ab0d5d0a4cc9232373e698b2111b68192043ec11f8b315b37349e15819a"
+      sha256 "89451a4d851bd79e4d700fe1e91be1eb52c1a3fad32046fe393b63273872b64c"
     end
   end
 
