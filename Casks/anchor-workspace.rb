@@ -1,9 +1,9 @@
 cask "anchor-workspace" do
   arch arm: "aarch64", intel: "x64"
 
-  version "0.2.18"
-  sha256 arm: "4099f66167ee132b79f03301971a47e59671f7ba5e2083ab8c2385eb77a559f8",
-         intel: "8317eea45e094e8acf133e6ba5a038e7863fed8c5e08759484a48e06d8bfdd3e"
+  version "0.2.19"
+  sha256 arm: "1581d46692feb1f5c77e95a74c68efa32cfe8767045b3ecae8cdd32925b36123",
+         intel: "d8b2027c80547cc6ca1df01c483fd66d7cab5a86219f1237e16c33440d23f5ee"
 
   url "https://github.com/STAIxBWLB/anchor/releases/download/v#{version}/Anchor_#{version}_darwin_#{arch}_dmg.dmg"
   name "Anchor"
