@@ -38,7 +38,7 @@ jobs:
           brew tap-info staixbwlb/cask
 
       - name: Audit cask
-        run: brew audit --cask --strict --online staixbwlb/cask/anchor-workspace
+        run: brew audit --cask --strict --online staixbwlb/cask/maru-workspace
 
       - name: Audit formula
-        run: brew audit --formula --strict --online staixbwlb/cask/anchor-cli
+        run: brew audit --formula --strict --online staixbwlb/cask/maru-cli
