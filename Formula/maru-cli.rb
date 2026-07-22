@@ -1,16 +1,16 @@
 class MaruCli < Formula
   desc "Command-line interface for Maru Workspace"
   homepage "https://github.com/STAIxBWLB/maru"
-  version "0.4.10"
+  version "0.4.11"
   license :cannot_represent
 
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/STAIxBWLB/maru/releases/download/v#{version}/maru-cli_#{version}_darwin_aarch64.tar.gz"
-      sha256 "4ff4fcd3b3832c0309323f7bd2374f77b704eea5c4f6436379b4a2000752b2ce"
+      sha256 "2a038dc78ce60be22c2eb7df8c32a91fb4bcf0dee90f2aeaa03c32b07975873c"
     else
       url "https://github.com/STAIxBWLB/maru/releases/download/v#{version}/maru-cli_#{version}_darwin_x86_64.tar.gz"
-      sha256 "1bcc5122f9fd04606cb8699b4cda5c3d8c2bea32466f2ad11a6e4aed8aa6591d"
+      sha256 "04bc885954a1ab8474dbf842b957c816ab94f2c3ea79805be572db25ada5ff2d"
     end
   end
 
