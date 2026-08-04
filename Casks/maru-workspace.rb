@@ -1,9 +1,9 @@
 cask "maru-workspace" do
   arch arm: "aarch64", intel: "x64"
 
-  version "0.4.43"
-  sha256 arm:   "5a99057e69bbf581c308117ed57ed8f6927ad05d4d7e99b35783482c95e40a76",
-         intel: "bf24481027bd70812267e3ecdd449b89bd73dbf56242795177107e2e288ad909"
+  version "0.4.44"
+  sha256 arm:   "e786d45e4003cffc6b5ac4d32e2d08e088ad7dc0e06bcb189b6019a1b79b0f50",
+         intel: "295c545ddf5cf51fb4ccba7433b15f57d7cc95d979f3a920ccd1082a379c04c8"
 
   url "https://github.com/STAIxBWLB/maru/releases/download/v#{version}/Maru_#{version}_darwin_#{arch}_dmg.dmg"
   name "Maru"
