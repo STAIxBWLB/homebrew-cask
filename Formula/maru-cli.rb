@@ -10,11 +10,11 @@ class MaruCli < Formula
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/STAIxBWLB/maru/releases/download/v1.1.13/maru-cli_1.1.13_darwin_aarch64.tar.gz"
-      sha256 "9ea44c6b393888d16969499d62a3c09587e4bc6039cd92982870153789d4a4b4"
+      url "https://github.com/STAIxBWLB/maru/releases/download/v1.1.14/maru-cli_1.1.14_darwin_aarch64.tar.gz"
+      sha256 "c33744cb7c11362c2d8840bfd0cbf7414e4ac80f2c941183d122691b5a2eb5a1"
     else
-      url "https://github.com/STAIxBWLB/maru/releases/download/v1.1.13/maru-cli_1.1.13_darwin_x86_64.tar.gz"
-      sha256 "525d6d78087da4feefdcc515465e6dd8cae109f101f7cc22a68ee0e76b05c5ee"
+      url "https://github.com/STAIxBWLB/maru/releases/download/v1.1.14/maru-cli_1.1.14_darwin_x86_64.tar.gz"
+      sha256 "eb192e23a02b4a9d4d0f489d6fe9fb365fa84661e108d2a2614f2ec2afd7ceaa"
     end
   end
 
