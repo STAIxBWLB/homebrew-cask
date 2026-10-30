@@ -5,13 +5,13 @@
 class Dotfiles < Formula
   desc "Declarative dotfiles manager and AI tmux workspace orchestrator"
   homepage "https://github.com/STAIxBWLB/dotfiles"
-  version "2.71.0"
+  version "2.71.1"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/STAIxBWLB/dotfiles/releases/download/v2.71.0/dot_2.71.0_darwin_amd64.tar.gz"
-      sha256 "6f367f6abc5f21f6e838b199090689fc6b9acbeb18f4681b37e41b30f82bcc47"
+      url "https://github.com/STAIxBWLB/dotfiles/releases/download/v2.71.1/dot_2.71.1_darwin_amd64.tar.gz"
+      sha256 "8a7b6933647cd6f4fa0e0d67d7af02fb89098dc4e54cf3c5d6e82adc39fda137"
 
       define_method(:install) do
         bin.install "dot"
@@ -19,8 +19,8 @@ class Dotfiles < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/STAIxBWLB/dotfiles/releases/download/v2.71.0/dot_2.71.0_darwin_arm64.tar.gz"
-      sha256 "e4d44f1a9eea6d2d89e3c4df4e9fd4d9f4fa5c2a4ee2c48edcb8cac059c336b0"
+      url "https://github.com/STAIxBWLB/dotfiles/releases/download/v2.71.1/dot_2.71.1_darwin_arm64.tar.gz"
+      sha256 "9701fc49b253a917e016c124f694613af1b1feeff332cf4760592e8d56ef5945"
 
       define_method(:install) do
         bin.install "dot"
@@ -31,16 +31,16 @@ class Dotfiles < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/STAIxBWLB/dotfiles/releases/download/v2.71.0/dot_2.71.0_linux_amd64.tar.gz"
-      sha256 "8dfab284c582697bc78715e78dfc2ccb2e3d7435bb119e4f440489ab81a67713"
+      url "https://github.com/STAIxBWLB/dotfiles/releases/download/v2.71.1/dot_2.71.1_linux_amd64.tar.gz"
+      sha256 "aa0f6d88ebaa4d8ac7598b7d745930a1f5111db40e399455a6d0833e0b150f03"
       define_method(:install) do
         bin.install "dot"
         bin.install_symlink "dot" => "dotfiles"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/STAIxBWLB/dotfiles/releases/download/v2.71.0/dot_2.71.0_linux_arm64.tar.gz"
-      sha256 "89753006742188ef824b62c67583263026a17326fb402496812c4473f0f245fd"
+      url "https://github.com/STAIxBWLB/dotfiles/releases/download/v2.71.1/dot_2.71.1_linux_arm64.tar.gz"
+      sha256 "d77f685ffb89d0ffa31637fe53ff0db9dca75faefb5feddd32f1d0d27eee0733"
       define_method(:install) do
         bin.install "dot"
         bin.install_symlink "dot" => "dotfiles"
