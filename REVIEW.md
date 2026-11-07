@@ -26,8 +26,9 @@ Run these passes and tag every finding with its pass:
 - The audit loads the tap only after trusting it: Homebrew 6.0+ refuses an untrusted tap
   (`.github/workflows/audit.yml:40-43`). A change that audits before this step fails at load time.
 - Only an audited commit reaches `main` from a release bot: the `publish` job runs only for pushes to
-  `publish/**` after `audit` passes, and merges with `--match-head-commit` on the audited SHA
-  (`.github/workflows/audit.yml:51-74`). Known exception: `Formula/dotfiles.rb` is not audited
+  `publish/**` after `audit` passes, refuses a branch that touches files outside `Casks/` and
+  `Formula/` (`.github/workflows/audit.yml:73-79`), and merges with `--match-head-commit` on the
+  audited SHA (`.github/workflows/audit.yml:51-81`). Known exception: `Formula/dotfiles.rb` is not audited
   (`.github/workflows/audit.yml:45-49` names only `maru-workspace` and `maru-cli`).
 - `Casks/` and `Formula/` are rendered by the producers' release jobs (STAIxBWLB/maru
   `scripts/update-homebrew-tap.mjs`, STAIxBWLB/dotfiles `.goreleaser.yaml`). A hand edit here is

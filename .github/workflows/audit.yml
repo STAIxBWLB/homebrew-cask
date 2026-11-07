@@ -70,5 +70,12 @@ jobs:
             gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$BRANCH" \
               --title "${MESSAGE%%$'\n'*}" --body "Audited in $RUN_URL"
           fi
-          # Merge exactly the commit the audit job checked.
+          # A publish branch may change only rendered casks and formulae; it must
+          # not rewrite this workflow or anything else on its way to main.
+          outside=$(gh pr diff "$BRANCH" --repo "$GITHUB_REPOSITORY" --name-only | grep -Ev '^(Casks|Formula)/' || true)
+          if [ -n "$outside" ]; then
+            echo "::error::$BRANCH changes files outside Casks/ and Formula/: $outside. Land those through a normal reviewed PR."
+            exit 1
+          fi
+          # Merge only if the PR head is still the commit the audit job checked.
           gh pr merge "$BRANCH" --repo "$GITHUB_REPOSITORY" --rebase --delete-branch --match-head-commit "$GITHUB_SHA"
