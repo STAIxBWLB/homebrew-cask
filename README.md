@@ -7,7 +7,7 @@ Homebrew tap for [Maru](https://github.com/STAIxBWLB/maru) — a local-first AI 
 ```bash
 brew install --cask staixbwlb/cask/maru-workspace # desktop app → /Applications/Maru.app
 brew install staixbwlb/cask/maru-cli              # CLI → /opt/homebrew/bin/maru (or /usr/local/bin on Intel)
-brew install staixbwlb/cask/dotfiles              # dot CLI
+brew install --cask staixbwlb/cask/dotfiles       # dot CLI (macOS and Linuxbrew)
 ```
 
 Homebrew 6.0+ loads only [trusted taps](https://docs.brew.sh/Tap-Trust). Installing by the full `staixbwlb/cask/<name>` taps the repository and trusts that item, so later commands can use the short name. If an existing install fails with `Refusing to load ... from untrusted tap`, trust the item once:
@@ -15,7 +15,7 @@ Homebrew 6.0+ loads only [trusted taps](https://docs.brew.sh/Tap-Trust). Install
 ```bash
 brew trust --cask staixbwlb/cask/maru-workspace
 brew trust --formula staixbwlb/cask/maru-cli
-brew trust --formula staixbwlb/cask/dotfiles
+brew trust --cask staixbwlb/cask/dotfiles
 ```
 
 ## Upgrade
@@ -24,7 +24,10 @@ brew trust --formula staixbwlb/cask/dotfiles
 brew update
 brew upgrade --cask maru-workspace
 brew upgrade maru-cli
+brew upgrade --cask dotfiles
 ```
+
+`dotfiles` was a formula until STAIxBWLB/dotfiles#344. `tap_migrations.json` moves an existing formula install to the cask on the next `brew update` (Homebrew unlinks the formula and installs the cask when the tap is trusted and the prefix has a `Caskroom`). Otherwise run `brew uninstall --formula --force dotfiles && brew install --cask staixbwlb/cask/dotfiles`.
 
 ## Signing & notarization
 
