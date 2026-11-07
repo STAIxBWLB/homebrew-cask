@@ -42,8 +42,15 @@ jobs:
           brew trust --tap staixbwlb/cask
           brew trust
 
-      - name: Audit cask
-        run: brew audit --cask --strict --online staixbwlb/cask/maru-workspace
+      # Every cask in Casks/, so dotfiles is audited from the first publish
+      # branch that adds it (STAIxBWLB/dotfiles#344).
+      - name: Audit casks
+        working-directory: tap
+        run: |
+          set -euo pipefail
+          for cask in Casks/*.rb; do
+            brew audit --cask --strict --online "staixbwlb/cask/$(basename "$cask" .rb)"
+          done
 
       - name: Audit formula
         run: brew audit --formula --strict --online staixbwlb/cask/maru-cli
