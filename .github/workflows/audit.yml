@@ -1,21 +1,20 @@
 name: brew audit
 
+# Release bots push to publish/<name>-<version>, never to main. The publish
+# job lands that branch on main only after the audit passes on its commit.
+# No paths filter: main requires the audit check on every PR.
 on:
   push:
-    branches: [main]
-    paths:
-      - "Casks/**"
-      - "Formula/**"
-      - ".github/workflows/audit.yml"
+    branches: [main, "publish/**"]
   pull_request:
-    paths:
-      - "Casks/**"
-      - "Formula/**"
-      - ".github/workflows/audit.yml"
   workflow_dispatch:
 
 permissions:
   contents: read
+
+concurrency:
+  group: audit-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   audit:
@@ -37,8 +36,46 @@ jobs:
           ln -sf "$GITHUB_WORKSPACE/tap" "$(brew --repository)/Library/Taps/staixbwlb/homebrew-cask"
           brew tap-info staixbwlb/cask
 
+      # Homebrew 6.0+ refuses to load casks and formulae from an untrusted tap.
+      - name: Trust tap
+        run: |
+          brew trust --tap staixbwlb/cask
+          brew trust
+
       - name: Audit cask
         run: brew audit --cask --strict --online staixbwlb/cask/maru-workspace
 
       - name: Audit formula
         run: brew audit --formula --strict --online staixbwlb/cask/maru-cli
+
+  publish:
+    needs: audit
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads/publish/')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      pull-requests: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      BRANCH: ${{ github.ref_name }}
+      MESSAGE: ${{ github.event.head_commit.message }}
+      RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+    steps:
+      - name: Open PR and merge the audited commit
+        run: |
+          set -euo pipefail
+          if ! gh pr view "$BRANCH" --repo "$GITHUB_REPOSITORY" --json state --jq .state | grep -qx OPEN; then
+            gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$BRANCH" \
+              --title "${MESSAGE%%$'\n'*}" --body "Audited in $RUN_URL"
+          fi
+          # A publish branch may change only rendered casks and formulae; it must
+          # not rewrite this workflow or anything else on its way to main.
+          outside=$(gh pr diff "$BRANCH" --repo "$GITHUB_REPOSITORY" --name-only | grep -Ev '^(Casks|Formula)/' || true)
+          if [ -n "$outside" ]; then
+            echo "::error::$BRANCH changes files outside Casks/ and Formula/: $outside. Land those through a normal reviewed PR."
+            exit 1
+          fi
+          # Merge only if the PR head is still the commit the audit job checked.
+          gh pr merge "$BRANCH" --repo "$GITHUB_REPOSITORY" --rebase --delete-branch --match-head-commit "$GITHUB_SHA"
