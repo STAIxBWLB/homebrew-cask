@@ -27,9 +27,10 @@ Run these passes and tag every finding with its pass:
   (`.github/workflows/audit.yml:40-43`). A change that audits before this step fails at load time.
 - Only an audited commit reaches `main` from a release bot: the `publish` job runs only for pushes to
   `publish/**` after `audit` passes, refuses a branch that touches files outside `Casks/` and
-  `Formula/` (`.github/workflows/audit.yml:73-79`), and merges with `--match-head-commit` on the
-  audited SHA (`.github/workflows/audit.yml:51-81`). Known exception: `Formula/dotfiles.rb` is not audited
-  (`.github/workflows/audit.yml:45-49` names only `maru-workspace` and `maru-cli`).
+  `Formula/` (`.github/workflows/audit.yml:72-78`), and merges with `--match-head-commit` on the
+  audited SHA (`.github/workflows/audit.yml:50-80`). The audit covers the whole tap
+  (`.github/workflows/audit.yml:45-48`); a change that names casks or formulae there one by one
+  lets a new one reach `main` unaudited.
 - `Casks/` and `Formula/` are rendered by the producers' release jobs (STAIxBWLB/maru
   `scripts/update-homebrew-tap.mjs`, STAIxBWLB/dotfiles `.goreleaser.yaml`). A hand edit here is
   overwritten by the next release; fix the producer template instead.
